@@ -1,0 +1,112 @@
+{% if section.settings.show_line %}<section class="content separator-section"><div class="container"><hr class="marginbottom66"></div></section>{% endif %}
+<section class="{% if section.settings.showbigindent %}content-big-indent{% else %}content{% endif %}">
+  <div class="container">
+    <div class="row">
+      {% if section.blocks.size > 0 %}
+      {% assign step = 12 | divided_by: section.blocks.size %}
+      {% for block in section.blocks %}
+      <div class="col-md-{{ step }}">
+        {% if section.settings.title_design == "design1" %}
+        <h4 class="title-icon text-uppercase"><span class="icon color icon-{{ block.settings.item_icon }} icon--flippedX"></span>{{ block.settings.item_title }}</h4>
+        {% elsif section.settings.title_design == "design2" %}
+        <span class="icon icon-{{ block.settings.item_icon }} font54 color"></span>
+        <h6 class="text-uppercase font22 title-bottom-sm">{{ block.settings.item_title }}</h6>
+        {% endif %}
+		{{ block.settings.item_text }}
+      </div>
+      <div class="divider divider--md visible-sm visible-xs"></div>
+      {% endfor %}
+      {% else %}
+      <span style="display: flex; justify-content: center;">This section doesn’t currently include any content. Add content to this section using the sidebar.</span>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Text Block 1",
+  "class": "index-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_line",
+      "label": "Show Top Line",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "showbigindent",
+      "label": "Big Container",
+      "default": false
+    },
+    {
+      "type": "radio",
+      "id": "title_design",
+      "label": "Title Type",
+      "options": [
+        { "value": "design1", "label": "Design 1" },
+        { "value": "design2", "label": "Design 2" }
+      ],
+      "default": "design1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item-block",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "text",
+          "id": "item_icon",
+          "label": "Material Icon",
+          "default": "local_shipping",
+		  "info": "[Material Icons](https:\/\/material.io\/icons\/#ic_desktop_mac)"
+        },
+        {
+          "type": "richtext",
+          "id": "item_text",
+          "label": "Content",
+		  "default": "<p>Content</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text Block 1",
+      "category": "Text Section",
+      "blocks": [
+        {
+          "type": "item-block"
+        },
+        {
+          "type": "item-block",
+		  "settings": {
+			"item_icon": "payment"
+		  }
+        },
+        {
+          "type": "item-block",
+		  "settings": {
+			"item_icon": "email"
+		  }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
