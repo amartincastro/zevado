@@ -1,0 +1,53 @@
+<!-- HEADER section -->
+<header id="header" class="{% if class == "header-layout-04" %}class{% else %}header-layout-05{% endif %}">
+  <!-- top-header -->
+  <div class="container">
+    <div class="row">
+      <!-- col-left -->
+      <div class="col-sm-3 text-left">
+        <!-- slogan start -->
+        <div class="slogan">{{ settings.header_slogan }}</div>
+        <!-- slogan end --> 	
+      </div>
+      <!-- /col-left -->
+      <!-- col-right -->
+      <div class="col-sm-9 text-right">
+        <div class="settings"{% unless settings.show_multiple_currencies %} style="display: none;"{% endunless %}>
+          {% include "header-currency" showTitle: true %}
+          {% include "header-language" align: 'text-right' showTitle: true %}
+        </div>
+      </div>
+      <!-- /col-right -->
+    </div>
+  </div>
+  <!-- /top-header -->
+  <div class="container">
+    <div class="row text-center">
+      <!--  -->
+      <div class="text-right extra-right">
+        {% include "menu-search" %}
+        {% include "menu-customer" %}
+        {% include "menu-cart" %}
+      </div>
+      <!-- / -->
+      <!-- logo start -->
+      <a href="/"><img class="logo img-responsive" src="{{ headerlogo }}" alt="logo"/></a> 
+      <!-- logo end --> 
+    </div>
+  </div>
+  <!-- nav -->
+  {% if class != "header-layout-04" %}<div class="stuck-nav">{% endif %}
+    <div class="container">
+      <div class="col-stuck-menu">
+        <div class="row text-center">
+          {% include "main-menu" %}
+        </div>
+      </div>
+      <div class="pull-right col-stuck-cart text-right">
+        {% include "menu-cart" %}
+      </div>
+    </div>
+  {% if class != "header-layout-04" %}</div>{% endif %}
+  <!-- /nav -->
+</header>
+<!-- End HEADER section -->

@@ -1,0 +1,11 @@
+{% if product.tags.size > 0 %}{% assign array = '' %}{% for t in product.tags %}{% assign array = array | append: t %}{% unless forloop.last %}{% assign array = array | append: ',' %}{% endunless %}{% endfor %}{% assign array = array | downcase | split:',' %}
+<ul class="tags-list">
+  {% assign tags = settings.shopby_tags_filter | split: ',' %}
+  {% for t in tags %}
+  {% assign tag = t | strip | downcase %}
+  {% if array contains tag %}
+  <li><a href="{{ custom_url }}{{ tag | handle }}">{{ t }}</a></li>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endif %}
